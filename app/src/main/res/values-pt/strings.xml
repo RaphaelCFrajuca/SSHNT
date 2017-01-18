@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">SSHNT</string>
+    <string name="title">Comando Remoto SSH</string>
+    <string name="ssh_ip">IP SSH</string>
+    <string name="ssh_port">PORTA SSH</string>
+    <string name="button">CONECTAR</string>
+    <string name="ssh_user">USUARIO SSH</string>
+    <string name="ssh_password">SENHA SSH</string>
+    <string name="command">COMANDO</string>
+    <string name="title_second">Executar Comandos Shell</string>
+    <string name="input_second">COMANDO "Exemplo: ls -la"</string>
+    <string name="button_second">EXECUTAR</string>
+    <string name="alterne">SHELL LOCAL</string>
+    <string name="title_third">Criar Logins SSH</string>
+    <string name="sub_title_third">Sem acesso ao Shell!</string>
+    <string name="input_login">Usuario</string>
+    <string name="input_password">Senha</string>
+    <string name="button_third">CRIAR</string>
+    <string name="login_ssh">LOGIN SSH</string>
+    <string name="copy_all">COPIAR TUDO</string>
+
+</resources>

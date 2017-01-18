@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.badguy.sshnt.MainActivity">
+
+    <TextView
+        android:text="By: Bad Guy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/by"
+        android:textSize="14sp"
+        android:textStyle="normal|bold"
+        android:clickable="true" />
+
+    <Button
+        android:text="@string/alterne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/second"
+        android:onClick="startSecondActivity" />
+
+    <Button
+        android:text="@string/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/comando"
+        android:hint="@string/command"
+        android:layout_above="@+id/btn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/sshuser"
+        android:hint="@string/ssh_user"
+        android:layout_above="@+id/comando"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="18dp"
+        android:layout_toStartOf="@+id/btn" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/sshpassword"
+        android:hint="@string/ssh_password"
+        android:layout_alignBaseline="@+id/sshuser"
+        android:layout_alignBottom="@+id/sshuser"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/btn" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/sship"
+        android:hint="@string/ssh_ip"
+        android:layout_above="@+id/sshuser"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/sshuser" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/sshport"
+        android:hint="@string/ssh_port"
+        android:layout_above="@+id/sshpassword"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/sshpassword" />
+
+    <TextView
+        android:text="@string/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/sship"
+        android:layout_alignParentTop="true"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:textSize="30sp" />
+
+    <Button
+        android:text="@string/login_ssh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/second"
+        android:id="@+id/third" />
+
+
+</RelativeLayout>

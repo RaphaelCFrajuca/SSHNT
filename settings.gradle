@@ -1,0 +1,3 @@
+include ':app'
+include ':libraries:jzlib'
+include ':libraries:jsch'
