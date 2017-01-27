@@ -6,11 +6,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.AsyncTask;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Properties;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             sPreferences.edit().putBoolean("firstRun", false).apply();
             AlertDialog.Builder changelog = new AlertDialog.Builder(MainActivity.this);
             changelog.setTitle("Changelog");
-            changelog.setMessage("Telegram Official Channel: @sshnt\n1.5.5 - Design Updates\n1.5.6 - Added New Function\n1.5.7 - Local Shell Shows Output\n1.6.0 - Fix & Design Updates\n1.6.1 - App Updates\n1.6.5 - Now the App Saves the latest user inputs\n1.6.6 - Fixed Toast Activity\n1.6.7 - Force to use app only in Portrait Mode\n1.7.0 - Create SSH for FREE ! & Security Fix\n1.7.5 - Fixes & new mode to Create Free Logins\n1.7.6 - Set Output in create Free SSH Logins in EditText\n1.7.7 - Added Button COPY ALL\n1.7.8 - Fix LOCAL SHELL\n1.8.0 - Performance Updates & Replaced Password for Public Key");
+            changelog.setMessage("Telegram Official Channel: @sshnt\n1.5.5 - Design Updates\n1.5.6 - Added New Function\n1.5.7 - Local Shell Shows Output\n1.6.0 - Fix & Design Updates\n1.6.1 - App Updates\n1.6.5 - Now the App Saves the latest user inputs\n1.6.6 - Fixed Toast Activity\n1.6.7 - Force to use app only in Portrait Mode\n1.7.0 - Create SSH for FREE ! & Security Fix\n1.7.5 - Fixes & new mode to Create Free Logins\n1.7.6 - Set Output in create Free SSH Logins in EditText\n1.7.7 - Added Button COPY ALL\n1.7.8 - Fix LOCAL SHELL\n1.8.0 - Performance Updates & Replaced Password for Public Key\n1.8.1 - Remote Commands show output");
             changelog.setNeutralButton("Ok", null);
             changelog.show();
         }
@@ -100,11 +103,11 @@ public class MainActivity extends AppCompatActivity {
                             executeRemoteCommand(sshuserstring, sshpasswordstring,sshipstring, Integer.parseInt(sshportstring));
                         } catch (Exception e) {
                             e.printStackTrace();
+                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         }
                         return null;
                     }
                 }.execute(1);
-                Toast.makeText(MainActivity.this, "Executed Suceffuly", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -116,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 // Avoid asking for key confirmation
                 Properties prop = new Properties();
                 prop.put("StrictHostKeyChecking", "no");
-                prop.put("Compression", "yes");
+                //prop.put("Compression", "yes");
                 prop.put("ConnectionAttempts","2");
                 session.setConfig(prop);
 
@@ -126,12 +129,32 @@ public class MainActivity extends AppCompatActivity {
                 ChannelExec channelssh = (ChannelExec)
                         session.openChannel("exec");
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                channelssh.setOutputStream(baos);
-
+                BufferedReader in = new BufferedReader(new InputStreamReader(channelssh.getInputStream()));
                 // Execute command
+                EditText comando = (EditText) findViewById(R.id.comando);
                 String comandostring = comando.getText().toString();
                 channelssh.setCommand(comandostring);
                 channelssh.connect();
+
+                final StringBuilder output = new StringBuilder();
+
+                String s = null;
+                while((s = in.readLine()) != null){
+                    output.append(s + "\r\n");
+                }
+
+
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView out = (TextView) findViewById(R.id.out);
+                        out.setMovementMethod(new ScrollingMovementMethod());
+                        out.setText(output);
+                        Toast.makeText(MainActivity.this, "Executed Suceffuly", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 channelssh.disconnect();
                 return baos.toString();
             }
